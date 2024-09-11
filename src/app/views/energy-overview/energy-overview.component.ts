@@ -8,6 +8,9 @@ import {
 } from '@angular/core';
 import { EnergyDataService } from '../../services/energy-data.service';
 import ApexCharts, { ApexOptions } from 'apexcharts';
+import { CellComponent, ColumnDefinition, Tabulator } from 'tabulator-tables';
+import { DateTime } from 'luxon';
+import { EnergyEntry } from '../../models/energy-entry.model';
 
 @Component({
   selector: 'app-energy-overview',
@@ -19,97 +22,30 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
     @Inject(EnergyDataService) private readonly energyService: EnergyDataService
   ) {}
   @ViewChild('batteryChart') chart?: ElementRef<HTMLDivElement>;
-  energyData: any;
-  mockDate = new Date();
-  /*   mockData = [
+  @ViewChild('tabulator') tabulatorViewChild?: ElementRef<HTMLDivElement>;
+  energyData: EnergyEntry[] = [];
+  table?: Tabulator;
+
+  columnDefinitions: ColumnDefinition[] = [
+    { title: 'Batterieladung', field: 'batteryPercent' },
+    { title: 'Batteriespannung', field: 'batteryVoltage' },
+    { title: 'Batterie Status', field: 'batteryStatus' },
     {
-      batteryLevel: 10,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(
-        this.mockDate.setHours(this.mockDate.getHours() - 10)
-      ),
+      title: 'Zeitpunkt',
+      field: 'occuredAtFormatted',
     },
-    {
-      batteryLevel: 15,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 9)),
-    },
-    {
-      batteryLevel: 33,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 8)),
-    },
-    {
-      batteryLevel: 25,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 7)),
-    },
-    {
-      batteryLevel: 50,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 6)),
-    },
-    {
-      batteryLevel: 64,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 5)),
-    },
-    {
-      batteryLevel: 80,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 4)),
-    },
-    {
-      batteryLevel: 100,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 3)),
-    },
-    {
-      batteryLevel: 78,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 2)),
-    },
-    {
-      batteryLevel: 54,
-      batteryPercent: '50%',
-      batteryStatus: 'Charging',
-      batteryVoltage: '12.5',
-      occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 1)),
-    },
-  ]; */
+  ];
   ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.energyService.getEnergyData().subscribe((data) => {
       this.energyData = data;
       this.drawChart();
+      this.drawTable();
     });
   }
 
   drawChart(force = false) {
-    // if (!this.mockData) return;
-    // if (this.chart?.nativeElement.hasChildNodes()) {
-    //   if (force) this.chart.nativeElement.innerHTML = '';
-    //   else return;
-    // }
     const values: { x: number; y: number }[] = [];
     if (this.energyData)
       this.energyData.forEach((h: any) => {
@@ -168,5 +104,20 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
       colors: ['#4DBD74'],
     };
     new ApexCharts(this.chart?.nativeElement, options).render();
+  }
+
+  drawTable(force = false): void {
+    if (this.energyData && this.tabulatorViewChild && (!this.table || force)) {
+      this.table = new Tabulator(this.tabulatorViewChild.nativeElement, {
+        columns: this.columnDefinitions,
+        layout: 'fitColumns',
+        pagination: true,
+        paginationSize: 25,
+        paginationSizeSelector: [10, 25, 50, -1],
+        paginationInitialPage: 1,
+        data: this.energyData,
+        locale: 'de-at',
+      });
+    }
   }
 }

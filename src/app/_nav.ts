@@ -8,7 +8,7 @@ export const navItems: any[] = [
     children: [
       {
         name: 'Energie-Dashboard',
-        url: 'energy-overview',
+        url: 'home',
         icon: 'icon-speedometer',
         attributes: {},
       },

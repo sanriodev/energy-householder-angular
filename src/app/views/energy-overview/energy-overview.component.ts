@@ -11,6 +11,15 @@ export class EnergyOverviewComponent implements OnInit {
     @Inject(EnergyDataService) private readonly energyService: EnergyDataService
   ) {}
   energyData: any;
+  mockData = [
+    {
+      batteryLevel: 50,
+      batteryPercent: '50%',
+      batteryStatus: 'Charging',
+      batteryVoltage: '12.5',
+      occuredAt: new Date(),
+    },
+  ];
   ngOnInit(): void {
     this.energyService.getEnergyData().subscribe((data) => {
       this.energyData = data;

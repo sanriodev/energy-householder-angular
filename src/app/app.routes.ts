@@ -5,13 +5,12 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'energy-overview',
-    children: [
-      {
-        path: 'energy-overview',
-        component: EnergyOverviewComponent,
-      },
-    ],
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: EnergyOverviewComponent,
   },
 ];
 @NgModule({

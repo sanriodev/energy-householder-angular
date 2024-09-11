@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet></router-outlet><app-footer></app-footer>',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {

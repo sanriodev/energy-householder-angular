@@ -8,8 +8,7 @@ import {
 } from '@angular/core';
 import { EnergyDataService } from '../../services/energy-data.service';
 import ApexCharts, { ApexOptions } from 'apexcharts';
-import { CellComponent, ColumnDefinition, Tabulator } from 'tabulator-tables';
-import { DateTime } from 'luxon';
+import { ColumnDefinition, Tabulator } from 'tabulator-tables';
 import { EnergyEntry } from '../../models/energy-entry.model';
 
 @Component({

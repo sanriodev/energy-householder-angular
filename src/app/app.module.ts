@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app.routes';
+import { routes } from './app.routes';
 import { RouterModule } from '@angular/router';
 import { DefaultLayoutComponent } from './common';
 import { EnergyOverviewModule } from './views/energy-overview/energy-overview.module';
+import { BrowserModule } from '@angular/platform-browser';
 const APP_CONTAINERS = [DefaultLayoutComponent];
 
 @NgModule({
@@ -13,10 +13,10 @@ const APP_CONTAINERS = [DefaultLayoutComponent];
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    RouterModule,
     EnergyOverviewModule,
+    RouterModule.forRoot(routes),
   ],
+
   providers: [],
   bootstrap: [AppComponent],
 })

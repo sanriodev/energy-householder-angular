@@ -9,7 +9,7 @@ export class EnergyDataService {
   constructor(private http: HttpClient) {}
 
   getEnergyData(): Observable<any> {
-    return this.http.get('http://localhost:9000/api/v1/energy-data').pipe<any>(
+    return this.http.get('http://localhost:3000/api/v1/energy-data').pipe<any>(
       map<any, any>((res) => {
         if (res['success']) {
           return res['data'];

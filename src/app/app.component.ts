@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(
+    @Inject(Router)
     private router: Router // public iconSet: IconSetService
   ) {
     // iconSet singleton

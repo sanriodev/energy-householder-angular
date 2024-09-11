@@ -21,14 +21,7 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild('batteryChart') chart?: ElementRef<HTMLDivElement>;
   energyData: any;
   mockDate = new Date();
-  mockData = [
-    // {
-    //   batteryLevel: 40,
-    //   batteryPercent: '50%',
-    //   batteryStatus: 'Charging',
-    //   batteryVoltage: '12.5',
-    //   occuredAt: this.mockDate,
-    // },
+  /*   mockData = [
     {
       batteryLevel: 10,
       batteryPercent: '50%',
@@ -101,15 +94,14 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
       batteryVoltage: '12.5',
       occuredAt: new Date(this.mockDate.setHours(this.mockDate.getHours() - 1)),
     },
-  ];
-  ngOnInit(): void {
-    this.energyService.getEnergyData().subscribe((data) => {
-      this.energyData = data;
-    });
-  }
+  ]; */
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.drawChart();
+    this.energyService.getEnergyData().subscribe((data) => {
+      this.energyData = data;
+      this.drawChart();
+    });
   }
 
   drawChart(force = false) {
@@ -119,8 +111,8 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
     //   else return;
     // }
     const values: { x: number; y: number }[] = [];
-    if (this.mockData)
-      this.mockData.forEach((h: any) => {
+    if (this.energyData)
+      this.energyData.forEach((h: any) => {
         const value = h.batteryLevel;
         const timestamp = new Date(h.occuredAt).getTime();
         values.unshift({ x: timestamp, y: value });

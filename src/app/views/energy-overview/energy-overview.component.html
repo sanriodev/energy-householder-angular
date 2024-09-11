@@ -15,18 +15,18 @@
     <div class="row col-12 mb-2 table-sm">
       <table class="card w-100">
         <tr class="card-header m-0">
-          <th>Batterielevel</th>
-          <th>Batterie Prozent</th>
-          <th>Batterie Spannung</th>
-          <th>Batterie Status</th>
-          <th>Zeitpunkt</th>
+          <th class="m-2">Batterielevel</th>
+          <th class="m-2">Batterie Prozent</th>
+          <th class="m-2">Batterie Spannung</th>
+          <th class="m-2">Batterie Status</th>
+          <th class="m-2">Zeitpunkt</th>
         </tr>
-        <tr *ngFor="let data of mockData" class="card-body">
-          <th>{{ data.batteryLevel }}</th>
-          <th>{{ data.batteryPercent }}</th>
-          <th>{{ data.batteryVoltage }}</th>
-          <th>{{ data.batteryStatus }}</th>
-          <th>{{ data.occuredAt | date }}</th>
+        <tr *ngFor="let data of energyData" class="card-body">
+          <th class="m-2">{{ data.batteryLevel }}</th>
+          <th class="m-2">{{ data.batteryPercent }}</th>
+          <th class="m-2">{{ data.batteryVoltage }}</th>
+          <th class="m-2">{{ data.batteryStatus }}</th>
+          <th class="m-2">{{ data.occuredAt | date }}</th>
         </tr>
       </table>
     </div>

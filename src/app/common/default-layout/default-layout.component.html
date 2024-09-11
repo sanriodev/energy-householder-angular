@@ -1,0 +1,67 @@
+<ul class="nav navbar-nav ml-auto">
+  <li class="nav-item dropdown mr-4" dropdown placement="bottom right">
+    <a
+      class="nav-link"
+      style="text-transform: uppercase"
+      data-toggle="dropdown"
+      href="#"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      dropdownToggle
+      (click)="(false)"
+    >
+      <i class="cil-user"></i>
+    </a>
+    <div
+      class="dropdown-menu dropdown-menu-right"
+      *dropdownMenu
+      aria-labelledby="simple-dropdown"
+    >
+      <!-- <div class="dropdown-header text-center"><strong><i class="fa fa-key"></i> Account</strong></div> -->
+      <div *ngIf="isUserLoggedIn">
+        <a class="dropdown-item" href="#/account"
+          ><i class="cil-user"></i> Account</a
+        >
+      </div>
+      <div *ngIf="isUserLoggedIn">
+        <a class="dropdown-item" (click)="logout()" href="#/login"
+          ><i class="fa fa-lock"></i> Logout</a
+        >
+      </div>
+      <div *ngIf="!isUserLoggedIn">
+        <a class="dropdown-item" href="#/login"
+          ><i class="fa fa-lock"></i> Login</a
+        >
+      </div>
+    </div>
+  </li>
+</ul>
+<div class="app-root">
+  <!-- Main content -->
+  <main class="main">
+    <!-- deprecation warning for 'app-breadcrumb' -->
+    <!--<ol class="breadcrumb">-->
+    <!--<app-breadcrumb></app-breadcrumb>-->
+    <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
+    <!--<li class="breadcrumb-menu d-md-down-none">-->
+    <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
+    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
+    <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
+    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ol>-->
+    <div class="container-fluid"></div>
+    <!-- /.container-fluid -->
+  </main>
+</div>
+<footer style="z-index: 6">
+  <div class="content">
+    <img src="/assets/img/brand/adler-withe.svg" />
+    <div class="foot">2024 © All rights reserved.</div>
+  </div>
+  <span class="ml-auto"
+    >Powered by <a href="https://ematric.com/">sanriodev</a></span
+  >
+</footer>

@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { EnergyOverviewModule } from './views/energy-overview/energy-overview.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FooterComponent } from './common/footer/footer.component';
-const APP_CONTAINERS = [FooterComponent];
+import { NavbarComponent } from './common/navbar/navbar.component';
+const APP_CONTAINERS = [NavbarComponent, FooterComponent];
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],

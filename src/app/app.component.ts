@@ -1,25 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { EnergyDataService } from './service/energy-data.service';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ServicesModule } from './service/module/services.module';
-import { ToastrModule } from 'ngx-toastr';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, ServicesModule],
-  templateUrl: './app.component.html',
+  template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.scss'],
 })
-export class EnergyDataComponent implements OnInit {
+export class AppComponent {
   constructor(
-    @Inject(EnergyDataService) private readonly energyService: EnergyDataService
-  ) {}
-  energyData: any;
-  ngOnInit(): void {
-    this.energyService.getEnergyData().subscribe((data) => {
-      this.energyData = data;
+    private router: Router // public iconSet: IconSetService
+  ) {
+    // iconSet singleton
+    // iconSet.icons = { ...freeSet };
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
     });
   }
 }

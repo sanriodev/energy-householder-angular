@@ -1,0 +1,273 @@
+@import 'ngx-toastr/toastr';
+
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
+.card-small-body {
+  flex: 1 1 auto;
+  padding: 0, 1.25rem;
+}
+
+/*tr{
+  font-weight: bold;
+  text-align: center;
+
+}*/
+.tdCode {
+  text-align: left;
+}
+/*
+th{
+  text-align: center;
+} */
+
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 15px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 5px 6px;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+label {
+  font-weight: 900;
+}
+.invalid-select {
+  border: 2px solid #f86c6b;
+  border-radius: 5px;
+}
+
+.form-control.ng-select {
+  padding: 0;
+
+  .ng-select-container {
+    height: calc(1.5em + 0.75rem);
+    border: none;
+    min-height: unset;
+  }
+}
+
+.buttons-page-length .dt-down-arrow {
+  display: none;
+}
+
+.add-button {
+  float: right;
+  display: inline-flex;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  position: absolute;
+ /* top: 10px;*/
+  right: 5px;
+  font-size: 2em;
+  padding: 0 0 10px 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-close-button {
+  float: right;
+  display: block;
+  height: 50px;
+  width: 50px;
+  font-size: 2em;
+  color: black;
+  background-color: Transparent;
+  border: none;
+}
+
+// ----------- fixups for access control components ------------
+
+.dt-filter-left {
+  > div {
+    text-align: left !important;
+  }
+}
+
+bs-modal-backdrop {
+  z-index: 9 !important; // wtf  
+}
+
+.modal {
+  margin-top: 50px !important; 
+}
+
+
+.sidebar .nav-dropdown.open > .nav-dropdown-items{
+  padding-left: 20px;
+}
+.sidebar .nav-dropdown > .nav-dropdown-items{
+  padding-left: 20px;
+}
+
+
+//----------------
+.sidepanel {
+  @media (min-width: 576px) {
+    width: 60% !important;
+  }
+  overflow: scroll;
+  transform: none;
+  z-index: 4 !important;
+  max-width: 100% !important;
+  right: 0;
+  display: block;
+  position: absolute;
+  top: 55px;
+  bottom: 50px;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+.progress {
+  height: 30px;
+  width: 230px;
+  border: solid thin rgb(13, 12, 12);
+  overflow: visible;
+  position: relative;
+  padding: 2px;
+}
+
+.progress:after {
+  content: " ";
+  top: 8px;
+  right: -4.5px;
+  height: 13px;
+  width: 4px;
+  border-radius: 25px;
+  position: absolute;
+  background: rgb(13, 12, 12);
+}
+
+.chargeIndicator {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.deviceId {
+  position: relative;
+  padding-left: 20px;
+}
+
+.deviceId:before {
+  content: " ";
+  top: 8px;
+  height: 15px;
+  width: 15px;
+  left: 0px;
+  border-radius: 50%;
+  position: absolute;
+  background: rgb(13, 12, 12);
+  border-color: black;
+}
+
+.deviceId.current:before {
+  background: #4dbd74;
+}
+
+.deviceId.old:before {
+  background: #ff4136;
+}
+.progressLabel {
+  font-size: 100%;
+  color: black;
+  top: 5px;
+  right: 100px;
+  height: 3px;
+  position: absolute;
+}
+
+.header {
+  padding: 10px;
+}
+.mainline {
+  color: #000000;
+  font-size: 30px;
+  font-weight: 900;
+}
+.subline {
+  text-align: center;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700;
+}
+.btn-box {
+  text-align: center;
+  color: #011931;
+  padding: 0%;
+  margin-top: 20px;
+  display: inline-block;
+  border-radius: 12px;
+  margin: 10px;
+}
+.btn-box:hover {
+  -ms-transform: scale(1.25); /* IE 9 */
+  -webkit-transform: scale(1.25); /* Safari 3-8 */
+  transform: scale(1.25);
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
+    0 1px 18px 0 rgb(0 0 0 / 12%);
+  color: #022950;
+}
+
+.btn-box span {
+  display: block;
+  font-weight: 700;
+  color: #022a51;
+  font-size: 14px;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.progress {
+  height: 30px;
+  width: 230px;
+  border: solid thin rgb(13, 12, 12);
+  overflow: visible;
+  position: relative;
+  padding: 2px;
+}
+
+.progress:after {
+  content: ' ';
+  top: 8px;
+  right: -4.5px;
+  height: 13px;
+  width: 4px;
+  border-radius: 25px;
+  position: absolute;
+  background: rgb(13, 12, 12);
+}
+
+.chargeIndicator {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.progressLabel {
+  font-size: 100%;
+  color: black;
+  top: 5px;
+  right: 100px;
+  height: 3px;
+  position: absolute;
+}

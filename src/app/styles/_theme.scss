@@ -1,0 +1,110 @@
+// @font-face {
+//     font-family: "Palanquin";
+//     src: url("../assets/fonts/Palanquin-Regular.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+// }
+
+// @font-face {
+//     font-family: "Palanquin";
+//     src: url("../assets/fonts/Palanquin-Bold.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+//     font-weight: bold;
+// }
+
+*::-webkit-input-placeholder {
+  font-family: Palanquin, Arial, Helvetica, sans-serif;
+  font: bold;
+}
+
+*:-ms-input-placeholder {
+  font-family: Palanquin, Arial, Helvetica, sans-serif;
+  font: bold;
+}
+
+*:-moz-placeholder {
+  font-family: Palanquin, Arial, Helvetica, sans-serif;
+  font: bold;
+}
+
+*::-moz-placeholder {
+  font: bold;
+  font-family: Palanquin, Arial, Helvetica, sans-serif;
+}
+
+.main {
+  z-index: 10;
+  .container-fluid {
+    padding: 10px 10px !important;
+    font-size: 18px;
+    font-family: Palanquin, Arial, Helvetica, sans-serif;
+    font: bold;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+app-footer {
+  img {
+    position: absolute;
+    right: 35px;
+    bottom: 55px;
+    z-index: 3;
+  }
+}
+
+app-dashboard {
+  background-image: url(/assets/img/background/adler-lacke-up.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.app-body {
+  /* background-image: url(/assets/img/background/background.png);*/
+
+  background-color: #8e8e8ee8;
+}
+
+.card {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #c8ced3;
+}
+// .card-header:first-child {
+//     border-radius: calc(0.5rem - 1px);
+// }
+
+.main-card-header {
+  min-height: 64px;
+  color: #ffffff;
+  font-weight: bold;
+
+  span {
+    font-size: 30px;
+  }
+}
+
+.main-card-header-seach {
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container-fluid-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  input[type="text"] {
+    min-width: 0px;
+    height: 35px;
+    border: none;
+    font-size: 24px;
+    min-width: none;
+  }
+}

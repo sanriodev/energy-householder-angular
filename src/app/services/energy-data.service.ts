@@ -9,11 +9,11 @@ import { EnergyEntry } from '../models/energy-entry.model';
 export class EnergyDataService {
   constructor(private http: HttpClient) {}
 
-  getEnergyData(): Observable<any> {
+  getEnergyData(): Observable<EnergyEntry[]> {
     return this.http
       .get('http://pi.local:3000/api/v1/energy-data')
-      .pipe<EnergyEntry>(
-        map<any, EnergyEntry>((res) => {
+      .pipe<EnergyEntry[]>(
+        map<any, EnergyEntry[]>((res) => {
           if (res['success']) {
             return res['data']?.map((entry: EnergyEntry) => {
               return new EnergyEntry(entry);

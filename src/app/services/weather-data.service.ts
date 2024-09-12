@@ -17,8 +17,8 @@ export class WeatherDataService {
       })
       .pipe<WeatherDataModel>(
         map<any, any>((res) => {
-          if (res['success']) {
-            return new WeatherDataModel(res['data']);
+          if (res) {
+            return new WeatherDataModel(res);
           } else return;
         })
       );

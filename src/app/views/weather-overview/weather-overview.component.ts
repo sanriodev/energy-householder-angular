@@ -8,8 +8,7 @@ import {
 } from '@angular/core';
 import { WeatherDataModel } from '../../models/weather-data.model';
 import { WeatherDataService } from '../../services/weather-data.service';
-import { ApexOptions } from 'apexcharts';
-import { DateTime } from 'luxon';
+import ApexCharts, { ApexOptions } from 'apexcharts';
 
 @Component({
   selector: 'app-weather-overview',
@@ -22,7 +21,8 @@ export class WeatherOverviewComponent implements OnInit, AfterViewInit {
     private readonly WeatherService: WeatherDataService
   ) {}
   @ViewChild('weatherChart') chart?: ElementRef<HTMLDivElement>;
-  WeatherData?: { x: DateTime; y: number }[];
+  chartData?: { x: number; temp: number; rain: number }[];
+  weatherData: WeatherDataModel | undefined;
 
   ngOnInit(): void {}
 
@@ -30,25 +30,32 @@ export class WeatherOverviewComponent implements OnInit, AfterViewInit {
     this.WeatherService.getWeatherData().subscribe(
       (data: WeatherDataModel | undefined) => {
         if (data) {
-          this.WeatherData = this.toChartData(data);
-          this.drawChart();
+          this.chartData = this.toChartData(data);
+          this.weatherData = data;
         }
-        return;
+        this.drawChart();
       }
     );
   }
 
   drawChart(force = false) {
-    const values: { x: DateTime; y: number }[] = [];
-    if (this.WeatherData)
-      this.WeatherData.forEach((h: { x: DateTime; y: number }) => {
-        values.unshift({ x: h.x, y: h.y });
+    const tempvalues: { x: number; y: number }[] = [];
+    const rainvalues: { x: number; y: number }[] = [];
+    if (this.chartData)
+      this.chartData.forEach((h: { x: number; temp: number; rain: number }) => {
+        tempvalues.unshift({ x: h.x, y: h.temp });
+        rainvalues.unshift({ x: h.x, y: h.rain });
       });
     const options: ApexOptions = {
       series: [
         {
-          name: 'Ladestatus in %',
-          data: values,
+          name: 'Temperatur in °C',
+          data: tempvalues,
+        },
+        {
+          name: 'Regen in mm',
+          data: rainvalues,
+          color: '#0088FF',
         },
       ],
       chart: {
@@ -74,10 +81,22 @@ export class WeatherOverviewComponent implements OnInit, AfterViewInit {
           datetimeUTC: false,
         },
       },
-      yaxis: {
-        min: 0,
-        max: 100,
-      },
+      yaxis: [
+        {
+          opposite: false,
+          title: {
+            text: 'Temperature in °C',
+            rotate: -90,
+          },
+        },
+        {
+          opposite: true,
+          title: {
+            text: 'Regen in mm',
+            rotate: -270,
+          },
+        },
+      ],
       tooltip: {
         x: {
           format: 'dd MMM yyyy, HH mm',
@@ -97,12 +116,15 @@ export class WeatherOverviewComponent implements OnInit, AfterViewInit {
     new ApexCharts(this.chart?.nativeElement, options).render();
   }
 
-  toChartData(data: WeatherDataModel): { x: DateTime; y: number }[] {
-    const values: { x: DateTime; y: number }[] = [];
+  toChartData(
+    data: WeatherDataModel
+  ): { x: number; temp: number; rain: number }[] {
+    const values: { x: number; temp: number; rain: number }[] = [];
     data.hourly.time.forEach((h: string, i: number) => {
-      const value = data.hourly.temperature_2m[i];
-      const timestamp = DateTime.fromISO(h);
-      values.unshift({ x: timestamp, y: value });
+      const temp = data.hourly.temperature_2m[i];
+      const rain = data.hourly.rain[i];
+      const timestamp = new Date(h).getTime();
+      values.unshift({ x: timestamp, temp: temp, rain: rain });
     });
     return values;
   }

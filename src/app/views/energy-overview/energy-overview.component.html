@@ -1,21 +1,21 @@
 <div class="content">
-  <div class="rowmb-4">
+  <div class="row mb-4">
     <div class="card">
       <div class="card-header">
-        <h3>Batterie Level Graph</h3>
+        <h3>Letzter Heartbeat</h3>
       </div>
       <div class="card-body">
-        <div #batteryChart></div>
+        <div>{{ energyData[0].batteryLevel }}</div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="card">
       <div class="card-header">
-        <h3>Daten-Entries</h3>
+        <h3>Batterie Level Graph</h3>
       </div>
       <div class="card-body">
-        <div #tabulator></div>
+        <div #batteryChart></div>
       </div>
     </div>
   </div>

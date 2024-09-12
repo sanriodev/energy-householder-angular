@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { EnergyDataService } from '../../services/energy-data.service';
 import ApexCharts, { ApexOptions } from 'apexcharts';
-import { ColumnDefinition, Tabulator } from 'tabulator-tables';
 import { EnergyEntry } from '../../models/energy-entry.model';
 
 @Component({
@@ -21,26 +20,14 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
     @Inject(EnergyDataService) private readonly energyService: EnergyDataService
   ) {}
   @ViewChild('batteryChart') chart?: ElementRef<HTMLDivElement>;
-  @ViewChild('tabulator') tabulatorViewChild?: ElementRef<HTMLDivElement>;
   energyData: EnergyEntry[] = [];
-  table?: Tabulator;
 
-  columnDefinitions: ColumnDefinition[] = [
-    { title: 'Batterieladung', field: 'batteryPercent' },
-    { title: 'Batteriespannung', field: 'batteryVoltage' },
-    { title: 'Batterie Status', field: 'batteryStatus' },
-    {
-      title: 'Zeitpunkt',
-      field: 'occuredAtFormatted',
-    },
-  ];
   ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.energyService.getEnergyData().subscribe((data) => {
       this.energyData = data;
       this.drawChart();
-      this.drawTable();
     });
   }
 
@@ -103,20 +90,5 @@ export class EnergyOverviewComponent implements OnInit, AfterViewInit {
       colors: ['#4DBD74'],
     };
     new ApexCharts(this.chart?.nativeElement, options).render();
-  }
-
-  drawTable(force = false): void {
-    if (this.energyData && this.tabulatorViewChild && (!this.table || force)) {
-      this.table = new Tabulator(this.tabulatorViewChild.nativeElement, {
-        columns: this.columnDefinitions,
-        layout: 'fitColumns',
-        pagination: true,
-        paginationSize: 25,
-        paginationSizeSelector: [10, 25, 50, -1],
-        paginationInitialPage: 1,
-        data: this.energyData,
-        locale: 'de-at',
-      });
-    }
   }
 }

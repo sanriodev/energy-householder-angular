@@ -13,4 +13,4 @@ or
 ng serve
 ```
 
-built with [Nestjs](https://github.com/angular/angular)
+built with [Angular](https://github.com/angular/angular)

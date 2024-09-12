@@ -1,6 +1,6 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { EnergyOverviewComponent } from './views/energy-overview/energy-overview.component';
-import { NgModule } from '@angular/core';
+import { HeartbeatOverviewComponent } from './views/heartbeat-overview/heartbeat-overview.component';
 
 export const routes: Routes = [
   {
@@ -11,5 +11,9 @@ export const routes: Routes = [
   {
     path: 'home',
     component: EnergyOverviewComponent,
+  },
+  {
+    path: 'heartbeats',
+    component: HeartbeatOverviewComponent,
   },
 ];

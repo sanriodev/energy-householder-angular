@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { EnergyEntry } from '../models/energy-entry.model';
 import { WeatherDataModel } from '../models/weather-data.model';
+import { weatherHttpParams } from '../common/constants/weather.params';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +10,16 @@ import { WeatherDataModel } from '../models/weather-data.model';
 export class WeatherDataService {
   constructor(private http: HttpClient) {}
 
-  getWeatherData(): Observable<WeatherDataModel> {
+  getWeatherData(): Observable<WeatherDataModel | undefined> {
     return this.http
-      .get('http://pi.local:3000/api/v1/energy-data')
+      .get('https://api.open-meteo.com/v1/forecast', {
+        params: weatherHttpParams,
+      })
       .pipe<WeatherDataModel>(
-        map<any, WeatherDataModel>((res) => {
+        map<any, any>((res) => {
           if (res['success']) {
-            return res['data']?.map((entry: WeatherDataModel) => {
-              return new WeatherDataModel(entry);
-            });
-          } else return null;
+            return new WeatherDataModel(res['data']);
+          } else return;
         })
       );
   }

@@ -7,6 +7,8 @@ import { EnergyOverviewModule } from './views/energy-overview/energy-overview.mo
 import { BrowserModule } from '@angular/platform-browser';
 import { FooterComponent } from './common/footer/footer.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
+import { HeartbeatOverviewModule } from './views/heartbeat-overview/heartbeat-overview.module';
+import { WeatherOverviewModule } from './views/weather-overview/weather-overview.module';
 const APP_CONTAINERS = [NavbarComponent, FooterComponent];
 
 @NgModule({
@@ -15,6 +17,8 @@ const APP_CONTAINERS = [NavbarComponent, FooterComponent];
     BrowserModule,
     HttpClientModule,
     EnergyOverviewModule,
+    HeartbeatOverviewModule,
+    WeatherOverviewModule,
     RouterModule.forRoot(routes),
   ],
 

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { EnergyOverviewComponent } from './views/energy-overview/energy-overview.component';
 import { HeartbeatOverviewComponent } from './views/heartbeat-overview/heartbeat-overview.component';
 import { WeatherOverviewComponent } from './views/weather-overview/weather-overview.component';
+import { HomeComponent } from './views/home.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +11,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'energy',
     component: EnergyOverviewComponent,
   },
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'weather',
     component: WeatherOverviewComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
 ];

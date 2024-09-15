@@ -1,0 +1,21 @@
+.card {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#fullscreen-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background-color: white;
+  border: 5%;
+  border-radius: 2%;
+}
+
+#profile-picture {
+  width: 250;
+  height: 250px;
+  border-radius: 50%;
+}

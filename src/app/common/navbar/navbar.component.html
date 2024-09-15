@@ -1,19 +1,30 @@
 <nav class="navbar navbar-expand-lg">
-  <div class="navbar-brand m-2 col-4">Energy Housholder</div>
+  <div class="navbar-brand m-2 col-4">
+    <img
+      id="pfp"
+      src="https://avatars.githubusercontent.com/sanriodev"
+      alt="Profile Picture"
+    />
+    Energy Householder
+  </div>
   <ul class="navbar-nav row col-8">
     <li class="col-2 nav-item">
-      <a class="btn btn-secondary w-100" href="/">Home</a>
+      <a class="btn btn-secondary w-100" [routerLink]="['/']">Home</a>
     </li>
     <li class="col-2 nav-item">
-      <a class="btn btn-secondary w-100" href="/home">Energie Übersicht</a>
+      <a class="btn btn-secondary w-100" [routerLink]="['energy']"
+        >Energie Übersicht</a
+      >
     </li>
     <li class="col-2 nav-item">
-      <a class="btn btn-secondary w-100" href="/heartbeats"
+      <a class="btn btn-secondary w-100" [routerLink]="['heartbeats']"
         >Heartbeat Übersicht</a
       >
     </li>
     <li class="col-2 nav-item">
-      <a class="btn btn-secondary w-100" href="/weather">Wetter Übersicht</a>
+      <a class="btn btn-secondary w-100" [routerLink]="['weather']"
+        >Wetter Übersicht</a
+      >
     </li>
   </ul>
 </nav>

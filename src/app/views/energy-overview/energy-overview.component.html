@@ -5,7 +5,11 @@
         <h3>Letzter Heartbeat</h3>
       </div>
       <div class="card-body">
-        <div>{{ energyData.length > 0 ? energyData[0].batteryLevel : "" }}</div>
+        <div>
+          <h5>
+            {{ energyData.length > 0 ? energyData[0].batteryPercent : "" }}
+          </h5>
+        </div>
       </div>
     </div>
   </div>

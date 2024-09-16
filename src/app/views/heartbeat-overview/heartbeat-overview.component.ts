@@ -1,4 +1,12 @@
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { EnergyEntry } from '../../models/energy-entry.model';
 import { EnergyDataService } from '../../services/energy-data.service';
 import { ColumnDefinition, Tabulator } from 'tabulator-tables';
@@ -8,7 +16,9 @@ import { ColumnDefinition, Tabulator } from 'tabulator-tables';
   templateUrl: './heartbeat-overview.component.html',
   styleUrls: ['./heartbeat-overview.component.scss'],
 })
-export class HeartbeatOverviewComponent {
+export class HeartbeatOverviewComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   constructor(
     @Inject(EnergyDataService)
     private readonly energyService: EnergyDataService
@@ -17,6 +27,7 @@ export class HeartbeatOverviewComponent {
   @ViewChild('tabulator') tabulatorViewChild?: ElementRef<HTMLDivElement>;
   energyData: EnergyEntry[] = [];
   table?: Tabulator;
+  nodeTimer?: NodeJS.Timeout;
 
   columnDefinitions: ColumnDefinition[] = [
     { title: 'Batterieladung', field: 'batteryPercent' },
@@ -31,10 +42,18 @@ export class HeartbeatOverviewComponent {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.energyService.getEnergyData().subscribe((data) => {
-      this.energyData = data;
-      this.drawTable();
-    });
+    this.nodeTimer = setInterval(
+      () =>
+        this.energyService.getEnergyData().subscribe((data) => {
+          this.energyData = data;
+          this.drawTable();
+        }),
+      30000
+    );
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.nodeTimer);
   }
 
   drawTable(force = false): void {

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -15,7 +16,9 @@ import ApexCharts, { ApexOptions } from 'apexcharts';
   templateUrl: './weather-overview.component.html',
   styleUrls: ['./weather-overview.component.scss'],
 })
-export class WeatherOverviewComponent implements OnInit, AfterViewInit {
+export class WeatherOverviewComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   constructor(
     @Inject(WeatherDataService)
     private readonly WeatherService: WeatherDataService
@@ -23,19 +26,27 @@ export class WeatherOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild('weatherChart') chart?: ElementRef<HTMLDivElement>;
   chartData?: { x: number; temp: number; rain: number }[];
   weatherData: WeatherDataModel | undefined;
-
+  nodeTimer?: NodeJS.Timeout;
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.WeatherService.getWeatherData().subscribe(
-      (data: WeatherDataModel | undefined) => {
-        if (data) {
-          this.chartData = this.toChartData(data);
-          this.weatherData = data;
-        }
-        this.drawChart();
-      }
+    this.nodeTimer = setInterval(
+      () =>
+        this.WeatherService.getWeatherData().subscribe(
+          (data: WeatherDataModel | undefined) => {
+            if (data) {
+              this.chartData = this.toChartData(data);
+              this.weatherData = data;
+            }
+            this.drawChart();
+          }
+        ),
+      30000
     );
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.nodeTimer);
   }
 
   drawChart(force = false) {

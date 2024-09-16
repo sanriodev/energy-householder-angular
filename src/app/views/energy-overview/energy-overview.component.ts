@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -15,20 +16,32 @@ import { EnergyEntry } from '../../models/energy-entry.model';
   templateUrl: './energy-overview.component.html',
   styleUrls: ['./energy-overview.component.scss'],
 })
-export class EnergyOverviewComponent implements OnInit, AfterViewInit {
+export class EnergyOverviewComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   constructor(
     @Inject(EnergyDataService) private readonly energyService: EnergyDataService
   ) {}
   @ViewChild('batteryChart') chart?: ElementRef<HTMLDivElement>;
   energyData: EnergyEntry[] = [];
 
+  nodeTimer?: NodeJS.Timeout;
+
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    clearInterval(this.nodeTimer);
+  }
+
   ngAfterViewInit() {
-    this.energyService.getEnergyData().subscribe((data) => {
-      this.energyData = data;
-      this.drawChart();
-    });
+    this.nodeTimer = setInterval(
+      () =>
+        this.energyService.getEnergyData().subscribe((data) => {
+          this.energyData = data;
+          this.drawChart();
+        }),
+      30000
+    );
   }
 
   drawChart(force = false) {
